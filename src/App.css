@@ -3,8 +3,18 @@
   margin: 0;
 }
 
+.page {
+  display: flex;
+}
+
 main {
+  height: 100vh;
+  box-sizing: border-box;
   padding: 5px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
 }
 
 nav {
@@ -39,8 +49,17 @@ nav img {
   box-sizing:border-box;
 }
 
-nav img:hover {
-  border: 3px solid grey;
+nav > div:last-child {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+nav > div:last-child:hover {
+  cursor: pointer;
+  background-color: rgb(59, 59, 59);
 }
 
 
@@ -201,4 +220,308 @@ hr {
   transition: color 0.25s ease;
 }
 
+/**/
+.middle-logo {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.middle-logo img {
+  width: 60px;
+}
+
+.recommendations {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.recommendation {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: self-start;
+  width:140px;
+  border: 1px solid #2F2F2F;
+  border-radius: 12px;
+  padding: 10px 14px 16px 14px;
+  transition: background-color .1s;
+  cursor: pointer;
+}
+
+.recommendation:hover {
+  background-color: #2F2F2F;
+}
+
+.recommendation:first-child svg {
+  color: #E2C441;
+}
+.recommendation:nth-child(2) svg {
+  color: #CB8BD0;
+}
+.recommendation:nth-child(3) svg {
+  color: #E2C441;
+}
+.recommendation:last-child svg {
+  color: #76D0EB;
+}
+
+
+
+/*UPLOAD Button-Field*/
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+footer > p {
+  font-size: 12px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  color: rgb(201, 201, 201);
+}
+
+.prompt-bar {
+  background-color: #2F2F2F;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  border-radius: 40px;
+  gap: 10px;
+  padding: 4px 10px;
+  width: 800px;
+}
+
+.prompt-bar > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-label{
+  display: inline-block;
+  background-color: transparent;
+  color: white;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.prompt-bar input[type=text] {
+  width: 100%;
+  height: 40px;
+  border: none;
+  background-color: #2F2F2F;
+  color: white;
+  font-size: 16px;
+}
+.prompt-bar input[type=text]:focus {
+  outline: none;
+  border: none;
+}
+
+.prompt-bar button {
+  width: 33px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  font-size: 18px;
+  background-color: #6c6c6c;
+  color: #2F2F2F;
+}
+
+
+
+
+/*SIDEBAR*/
+.sidebar {
+  padding: 10px 10px;
+  box-sizing: border-box;
+  max-width: 260px;
+  min-width: 260px;
+  height: 100vh;
+  background-color: #171717;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar > div {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.sidebar header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  color: #B4B4B4;
+}
+.sidebar header svg {
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.sidebar header svg:hover {
+  background-color: #212121;
+}
+
+.sidebar .gpts {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .gpt {
+  display: flex;
+  gap: 10px;
+  padding: 7px;
+  border-radius: 9px;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+.sidebar .gpt:hover {
+  background-color: #212121;
+  cursor: pointer;
+}
+
+.sidebar .gpt:hover > div:last-child {
+  display: inline-block;
+}
+
+.sidebar .gpt div {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar .gpt > div:last-child{
+  background-color: #212121;
+  padding: 2px 3px 2px 6px;
+  border-radius: 12px;
+  position: absolute;
+  right: 0;
+  display: none;
+}
+
+.sidebar .gpt > div:last-child svg {
+  margin-right: 10px;
+  color: grey;
+}
+
+
+.sidebar .gpt span {
+  display: inline-block;
+
+  border: 1px solid rgb(79, 79, 79);
+  width: 27px;
+  height: 25px;
+  display: flex;  
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.sidebar .gpt  p {
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.conversations {
+  display: flex;
+  flex-direction: column;
+}
+
+.conversations .header {
+  font-size: 13px;
+  color: #B4B4B4;
+  padding-left: 6px;
+}
+
+.conversation {
+  font-size: 15px;
+  font-weight: 400;
+  position: relative;
+  padding: 7px 6px;
+  border-radius: 5px;
+}
+
+.conversation p {
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+  background: linear-gradient(to right, white 85%, #171717);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+
+.conversation .options {
+  position: absolute;
+  display: none;
+  right: 4px;
+  top: 0px;
+  background-color: #212121;
+  font-size: 18px;
+  padding: 5px 5px;
+  border-radius: 50%;
+  color: grey;
+}
+.conversation:hover {
+  cursor: pointer;
+  background-color: #212121;
+}
+.conversation:hover .options {
+  display: inline-block;
+}
+
+
+.sidebar footer {
+  display: flex;
+  gap: 4px;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 8px 8px;
+  gap: 12px;
+}
+
+.sidebar footer:hover {
+  background-color: #212121;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.sidebar footer p {
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.sidebar footer span{
+  font-size: 11px;
+  color: grey;
+}
+
+.sidebar .icon {
+    display: inline-block;
+  
+    border: 1px solid rgb(79, 79, 79);
+    width: 30px;
+    height: 30px;
+    display: flex;  
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  
+}
 

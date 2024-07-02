@@ -1,120 +1,69 @@
 import './App.css';
+import logo from "./assets/chatgpt_logo.png";
+
+import Navbar from './components/Navbar';
+import AiModelsBar from './components/AI_Models/AiModelsBar';
+import ProfilePopup from './components/Profile_Popup/ProfilePopup';
+import RecommendationBar from './components/RecommendationBar';
+import PromptBar from './PromptBar';
+import SidebarHeader from './components/sidebar/SidebarHeader';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faStar, faComment, faCircleCheck, faCircleInfo, faCertificate, faUsersRays, faBook, faGear, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faRankingStar } from '@fortawesome/free-solid-svg-icons';
 
-import profile from "./assets/profile.jpg"
-
+import SidebarGptsBar from './components/sidebar/SidebarGptsBar';
+import SidebarConversationBar from './components/sidebar/SidebarConversationBar';
 
 function App() {
 
   return (
-    <main>
-      <nav>
-        <div className='model-bar'>
-          <span>ChatGPT 4o</span>
-          <span><FontAwesomeIcon icon={faChevronDown} /></span>
-        </div>
-
-        <img src={profile} alt="logo" />
-
-      </nav>
-
-
-
-      {/* there are 2 types of chat-bar; "Initial" and "chat" mode */}
-      <div className='chat-bar'>
-        <div className='models'>
-          <header>
-            <span>Model</span>
-            <FontAwesomeIcon icon={faCircleInfo} />
-          </header>
-          <div className='model'>
-            <div>
-              <FontAwesomeIcon icon={faStar} />
-              <div className='information'>
-                <p>GPT-4o</p>
-                <p>Newest and most advanced model</p>
-              </div>
-            </div>
-            <FontAwesomeIcon icon={faCircleCheck} />
-          </div>
-          <div className='model'>
-            <div>
-              <FontAwesomeIcon icon={faStar} />
-              <div className='information'>
-                <p>GPT-4</p>
-                <p>Advanced model for complex tasks</p>
-              </div>
-            </div>
-          </div>
-          <div className='model'>
-            <div>
-              <FontAwesomeIcon icon={faStar} />
-              <div className='information'>
-                <p>GPT-3.5</p>
-                <p>Great for everday tasks</p>
-              </div>
-            </div>
-          </div>
-          <hr />
-          <div className='model'>
-            <div>
-            <FontAwesomeIcon icon={faComment} />
-              <div className='information'>
-                <p>Temporary Chat</p>
-                <p></p>
-              </div>
-            </div>
-            <div class="checkboxes__item">
-              <label class="checkbox style-e">
-                <input type="checkbox"/>
-                <div class="checkbox__checkmark"></div>
-              </label>
-            </div>
-          </div>
-        </div>
-
-        {/*After clicked profile, this will be opened */}
-        <div className='profile'>
-          <div>
-            <FontAwesomeIcon icon={faCertificate} />
-            <span>My Plan</span>
-          </div>
-          <div>
-            <FontAwesomeIcon icon={faUsersRays} />
-            <span>My GPTs</span>
-          </div>
-          <div>
-            <FontAwesomeIcon icon={faBook} />
-            <span>Customize ChatGPT</span>
-          </div>
-          <div>
-            <FontAwesomeIcon icon={faGear} />
-            <span>Settings</span>
-          </div>
-          <hr />
-          <div>
-            <FontAwesomeIcon icon={faArrowRightFromBracket} />
-            <span>Log out</span>
-          </div>
-        </div>
-
+    <div className='page'>
+      <div className='sidebar'>
+        < SidebarHeader/>
         <div>
+          < SidebarGptsBar />
+          < SidebarConversationBar text="Today"/>
+          < SidebarConversationBar text="In Last 30 Days"/>
+          < SidebarConversationBar text="In Last 30 Days"/>
+          < SidebarConversationBar text="In Last 30 Days"/>
+          < SidebarConversationBar text="In Last 30 Days"/>
+          < SidebarConversationBar text="In Last 30 Days"/>
+          < SidebarConversationBar text="In Last 30 Days"/>
         </div>
-        <div className='recommendations'>
-          <div className='recommendation'></div>
-          <div className='recommendation'></div>
-          <div className='recommendation'></div>
-          <div className='recommendation'></div>
-        </div>
+
+        <footer>
+          <div className="icon">
+          <FontAwesomeIcon icon={faRankingStar} />
+          </div>
+          
+          <div>
+            <p>Add Team br workspace <br /><span>Collaborate on a Team plan</span></p>
+            
+          </div>
+        </footer>
       </div>
+      
+      <main>
+          <Navbar />
+          {/* there are 2 types of chat-bar; "Initial" and "chat" mode */}
+          <div className='chat-bar'>
+                  {/* <AiModelsBar /> */}
+
+                  {/*After clicked profile, this will be opened */}
+                  {/* <ProfilePopup /> */}
+            <div className='middle-logo'>
+              <img src={logo} alt="logo" />
+            </div>
+            <RecommendationBar />
+          </div>
 
 
-
-      <div className='prompt-bar'>
-
-      </div>
-    </main>
+          <footer>
+            <PromptBar />
+            <p>ChatGPT can make mistakes. Check important info.</p>
+          </footer>
+      </main>
+    </div>
   )
 }
 
