@@ -12,7 +12,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRankingStar } from '@fortawesome/free-solid-svg-icons';
 import logo from "./assets/chatgpt_logo.png";
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, createContext, useContext } from 'react';
+
+export const AppContext = createContext();
 
 
 function App() {
@@ -43,18 +45,22 @@ function App() {
   const submitBtnRef = useRef();
 
 
+  //Editable Record
+  const [editId, setEditId] = useState(0);
 
 
-  
 
   return (
+    <AppContext.Provider value={[editId, setEditId]}>
+
+
     <div className='page'>
-      <div className='sidebar' style={isSidebarOpened ? {width: "0px", padding: "10px 0px"}  : {width: "310px"}}>
+      <div className='sidebar' style={isSidebarOpened ? {width: "0px", padding: "10px 0px"}  : null}>
         < SidebarHeader setIsSidebarOpened={setIsSidebarOpened}/>
         <div>
           < SidebarGptsBar />
           < SidebarConversationBar text="Today"/>
-          < SidebarConversationBar text="In Last 30 Days"/>
+          {/* < SidebarConversationBar text="In Last 30 Days"/> */}
  
         </div>
 
@@ -94,6 +100,8 @@ function App() {
           </footer>
       </main>
     </div>
+    </AppContext.Provider>
+
   )
 }
 

@@ -14,7 +14,9 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 100%;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
 }
 
 nav {
@@ -353,7 +355,12 @@ footer > p {
   background-color: #6c6c6c;
   color: #2F2F2F;
 
-  transition: background-color .2s;
+  transition: background-color .1s;
+}
+
+.prompt-bar button:hover {
+  cursor: pointer;
+  background-color: #6c6c6c !important;
 }
 
 
@@ -363,12 +370,13 @@ footer > p {
 .sidebar {
   padding: 10px 10px;
   box-sizing: border-box;
-  width: 310px;
+  width: 260px;
   height: 100vh;
   background-color: #171717;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  flex-shrink: 0;
 
   transition: width .1s, padding .1s;
   overflow: hidden;
@@ -418,12 +426,15 @@ footer > p {
   /* Fade in tooltip */
   opacity: 0;
   transition: opacity 0.3s;
-  border: 1px solid grey;
+  border: 1px solid rgb(71, 71, 71);
   font-weight: 500;
 }
 
 .tooltip-text.left {
   left: 200%;
+}
+.tooltip-text.small {
+  width: 60px;
 }
 
 /* Tooltip arrow */
@@ -441,6 +452,10 @@ footer > p {
 
 .tooltip-text.left::after {
   left: 0%;
+}
+.tooltip-text.small::after {
+  margin-left: 5px;
+
 }
 
 /* Show the tooltip text when hovering over the tooltip container */
@@ -539,6 +554,7 @@ footer > p {
   position: relative;
   padding: 7px 6px;
   border-radius: 5px;
+  position: relative;
 }
 
 .conversation p {
@@ -549,6 +565,37 @@ footer > p {
   -webkit-background-clip: text;
   color: transparent;
 }
+
+.conversation .edit-menu {
+  background-color: #2F2F2F;
+  position: absolute;
+  border: 2px solid #444444;
+  display: flex;
+  flex-direction: column;
+  padding: 21px;
+  font-size: 15px;
+  border-radius: 20px;
+  gap: 12px;
+  right: 0px;
+  display: none;
+  z-index: 2;
+}
+.conversation .edit-menu.show {
+  display: inline-block;
+}
+
+.conversation .edit-menu .row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.conversation .edit-menu .row:last-child {
+  margin-bottom: 5px;
+}
+
+
 
 
 .conversation .options {

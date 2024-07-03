@@ -5,9 +5,9 @@ function SidebarConversationBar ({text}) {
         <div className='conversations'>
         <div className='header'>{text}</div>
 
-        <SidebarConversation text="Testimoniasl" />
-        <SidebarConversation text="TestimoniaslTestimoniaslTestimoniaslTestimoniasl" />
-        <SidebarConversation text="Testimoniasl" />
+        <SidebarConversation text="Testimoniasl" id={1}/>
+        <SidebarConversation text="TestimoniaslTestimoniaslTestimoniaslTestimoniasl" id={2}/>
+        <SidebarConversation text="Testimoniasl" id={3}/>
 
       </div>
     );
