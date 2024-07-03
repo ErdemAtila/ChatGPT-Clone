@@ -14,7 +14,10 @@ function Navbar ({setIsSidebarOpened, isSidebarOpened, setIsModelsPopupOpened, t
             isSidebarOpened ? 
             <>
               <SidebarOpenCloseBtn setIsSidebarOpened={setIsSidebarOpened} /> 
-              <FontAwesomeIcon icon={faPenToSquare} />
+              <div className="tooltip-container">
+                <FontAwesomeIcon icon={faPenToSquare} />
+                <span class="tooltip-text left">New Chat</span>
+              </div>
             </>  : ""
           }
           

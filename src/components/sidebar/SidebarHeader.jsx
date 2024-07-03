@@ -8,9 +8,13 @@ function SidebarHeader ({setIsSidebarOpened, isSidebarOpened}) {
 
     return (
     <header>
-        <SidebarOpenCloseBtn setIsSidebarOpened={setIsSidebarOpened} />
+        <SidebarOpenCloseBtn setIsSidebarOpened={setIsSidebarOpened} isSidebarOpened={isSidebarOpened} />
         {/* <FontAwesomeIcon onClick={() => sidebarBtnHandler(setIsSidebarOpened)} icon={faTableCellsLarge} /> */}
-        <FontAwesomeIcon icon={faPenToSquare} />
+        
+        <div className='tooltip-container'>
+            <FontAwesomeIcon icon={faPenToSquare} />
+            <span class="tooltip-text">New Chat</span>
+        </div>
     </header>
     );
 }

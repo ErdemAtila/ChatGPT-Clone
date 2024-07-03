@@ -352,6 +352,8 @@ footer > p {
   font-size: 18px;
   background-color: #6c6c6c;
   color: #2F2F2F;
+
+  transition: background-color .2s;
 }
 
 
@@ -387,6 +389,64 @@ footer > p {
   align-items: center;
   font-size: 20px;
   color: #B4B4B4;
+}
+
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip-text {
+  box-sizing: border-box;
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  font-size: 14px !important;
+  padding: 5px;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  top: 120%; /* Adjust as needed */
+  right: 0%;
+  margin-left: -80px; /* Use half of the width to center it */
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+  border: 1px solid grey;
+  font-weight: 500;
+}
+
+.tooltip-text.left {
+  left: 200%;
+}
+
+/* Tooltip arrow */
+.tooltip-text::after {
+  transform: rotate(180deg);
+  content: "";
+  position: absolute;
+  top: -50%; /* At the bottom of the tooltip */
+  left: 65%;
+  margin-left: 15px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: grey transparent transparent transparent;
+}
+
+.tooltip-text.left::after {
+  left: 0%;
+}
+
+/* Show the tooltip text when hovering over the tooltip container */
+.tooltip-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
 }
 .sidebar header svg {
   box-sizing: border-box;

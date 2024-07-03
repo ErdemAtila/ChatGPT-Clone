@@ -2,15 +2,13 @@ import { faLightbulb, faPenClip, faPlaneDeparture, faSuitcaseRolling } from '@fo
 
 import Recommendation from '../Recommendation';
 
-function RecommendationBar ({setPromptText}) {
+function RecommendationBar ({setPromptText, submitBtnRef}) {
     return(
     <div className='recommendations'>
-      <span>
-        <Recommendation icon={faLightbulb} text="Recipe with what's in my kitchen" />
-      </span>
-        <Recommendation icon={faPenClip} text="Text inviting friend to wedding" />
-        <Recommendation icon={faPlaneDeparture} text="Experience Seoul like a local" />
-        <Recommendation icon={faSuitcaseRolling} text="Fun fact about the Roman Empire" />
+        <Recommendation submitBtnRef={submitBtnRef} setPromptText={setPromptText} icon={faLightbulb} text="Recipe with what's in my kitchen" />
+        <Recommendation submitBtnRef={submitBtnRef} setPromptText={setPromptText} icon={faPenClip} text="Text inviting friend to wedding" />
+        <Recommendation submitBtnRef={submitBtnRef} setPromptText={setPromptText} icon={faPlaneDeparture} text="Experience Seoul like a local" />
+        <Recommendation submitBtnRef={submitBtnRef} setPromptText={setPromptText} icon={faSuitcaseRolling} text="Fun fact about the Roman Empire" />
       </div>
     );
 }

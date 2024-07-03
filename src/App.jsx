@@ -38,8 +38,11 @@ function App() {
   };
 
 
-  //Input (prompt text)
+  //Prompt Bar
   const [promptText, setPromptText] = useState("");
+  const submitBtnRef = useRef();
+
+
 
 
   
@@ -81,12 +84,12 @@ function App() {
             <div className='middle-logo'>
               <img src={logo} alt="logo" />
             </div>
-            <RecommendationBar setPromptText={setPromptText} />
+            <RecommendationBar setPromptText={setPromptText} submitBtnRef={submitBtnRef}/>
           </div>
 
 
           <footer>
-            <PromptBar setPromptText={setPromptText} promptText={promptText}/>
+            <PromptBar setPromptText={setPromptText} promptText={promptText} submitBtnRef={submitBtnRef}/>
             <p>ChatGPT can make mistakes. Check important info.</p>
           </footer>
       </main>
