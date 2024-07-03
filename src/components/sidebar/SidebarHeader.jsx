@@ -1,11 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTableCellsLarge, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+
+import SidebarOpenCloseBtn from './SidebarOpenCloseBtn';
 
 
-function SidebarHeader () {
+function SidebarHeader ({setIsSidebarOpened, isSidebarOpened}) {
+
     return (
     <header>
-        <FontAwesomeIcon icon={faTableCellsLarge} />
+        <SidebarOpenCloseBtn setIsSidebarOpened={setIsSidebarOpened} />
+        {/* <FontAwesomeIcon onClick={() => sidebarBtnHandler(setIsSidebarOpened)} icon={faTableCellsLarge} /> */}
         <FontAwesomeIcon icon={faPenToSquare} />
     </header>
     );

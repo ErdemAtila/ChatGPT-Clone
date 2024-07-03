@@ -1,34 +1,58 @@
 import './App.css';
-import logo from "./assets/chatgpt_logo.png";
-
 import Navbar from './components/Navbar';
 import AiModelsBar from './components/AI_Models/AiModelsBar';
 import ProfilePopup from './components/Profile_Popup/ProfilePopup';
 import RecommendationBar from './components/RecommendationBar';
-import PromptBar from './PromptBar';
+import {PromptBar} from './PromptBar';
 import SidebarHeader from './components/sidebar/SidebarHeader';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRankingStar } from '@fortawesome/free-solid-svg-icons';
-
 import SidebarGptsBar from './components/sidebar/SidebarGptsBar';
 import SidebarConversationBar from './components/sidebar/SidebarConversationBar';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRankingStar } from '@fortawesome/free-solid-svg-icons';
+import logo from "./assets/chatgpt_logo.png";
+
+import { useEffect, useRef, useState } from 'react';
+
+
 function App() {
+  //Sidebar
+  const [isSidebarOpened, setIsSidebarOpened] = useState(false);
+  const [isModelsPopupOpened, setIsModelsPopupOpened] = useState(false);
+
+  //Popups
+  const [isModelsPopupOpen, setIsModelsPopupOpen] = useState(false);
+  const [isProfilePopupOpen, setIsProfilePopupOpen] = useState(false);
+
+  const toggleModelsPopup = () => {
+      setIsModelsPopupOpen(!isModelsPopupOpen);
+  };
+  const closeModelsPopup = () => {
+      setIsModelsPopupOpen(false);
+  };
+  const toggleProfilePopup = () => {
+    setIsProfilePopupOpen(!isModelsPopupOpen);
+  };
+  const closeProfilePopup = () => {
+      setIsProfilePopupOpen(false);
+  };
+
+
+  //Input (prompt text)
+  const [promptText, setPromptText] = useState("");
+
+
+  
 
   return (
     <div className='page'>
-      <div className='sidebar'>
-        < SidebarHeader/>
+      <div className='sidebar' style={isSidebarOpened ? {width: "0px", padding: "10px 0px"}  : {width: "310px"}}>
+        < SidebarHeader setIsSidebarOpened={setIsSidebarOpened}/>
         <div>
           < SidebarGptsBar />
           < SidebarConversationBar text="Today"/>
           < SidebarConversationBar text="In Last 30 Days"/>
-          < SidebarConversationBar text="In Last 30 Days"/>
-          < SidebarConversationBar text="In Last 30 Days"/>
-          < SidebarConversationBar text="In Last 30 Days"/>
-          < SidebarConversationBar text="In Last 30 Days"/>
-          < SidebarConversationBar text="In Last 30 Days"/>
+ 
         </div>
 
         <footer>
@@ -44,22 +68,25 @@ function App() {
       </div>
       
       <main>
-          <Navbar />
-          {/* there are 2 types of chat-bar; "Initial" and "chat" mode */}
+          <Navbar 
+              setIsSidebarOpened={setIsSidebarOpened} 
+              isSidebarOpened={isSidebarOpened}
+              setIsModelsPopupOpened={setIsModelsPopupOpened}
+              toggleModelsPopup={toggleModelsPopup}
+              toggleProfilePopup={toggleProfilePopup}
+              />
           <div className='chat-bar'>
-                  {/* <AiModelsBar /> */}
-
-                  {/*After clicked profile, this will be opened */}
-                  {/* <ProfilePopup /> */}
+              <AiModelsBar isOpen={isModelsPopupOpen} onClose={closeModelsPopup}  />
+              <ProfilePopup isOpen={isProfilePopupOpen} onClose={closeProfilePopup} />
             <div className='middle-logo'>
               <img src={logo} alt="logo" />
             </div>
-            <RecommendationBar />
+            <RecommendationBar setPromptText={setPromptText} />
           </div>
 
 
           <footer>
-            <PromptBar />
+            <PromptBar setPromptText={setPromptText} promptText={promptText}/>
             <p>ChatGPT can make mistakes. Check important info.</p>
           </footer>
       </main>

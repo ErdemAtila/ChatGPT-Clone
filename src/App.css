@@ -21,23 +21,34 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: 3px;
 }
 
 nav .model-bar {
-  padding: 10px 5px;
-  border-radius: 7px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 3px;
   font-size: 18px;
   color: rgb(185, 185, 185);
   font-weight: 600;
 }
-nav .model-bar:hover {
-  background-color: #2F2F2F;
+nav .model-bar > div, nav .model-bar > svg {
+  padding: 8px 10px;
+  border-radius: 7px;
   cursor: pointer;
 }
+nav .model-bar > div {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+nav .model-bar > div:hover, nav .model-bar > svg:hover {
+  background-color: #2F2F2F;
+}
+
+
 nav .model-bar span:last-of-type {
   font-size: 12px;
 }
@@ -67,6 +78,13 @@ nav > div:last-child:hover {
 /*CHAT BAR*/
 .chat-bar {
   position: relative;
+  background-color: #242424;
+  flex-grow: 1;
+  flex-shrink: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 
@@ -110,6 +128,8 @@ hr {
 .chat-bar .models {
   width: 320px;
   padding: 20px 20px;
+  left: 0px;
+  top: 0px;
 }
 .chat-bar .models hr {
   margin: none;
@@ -341,13 +361,15 @@ footer > p {
 .sidebar {
   padding: 10px 10px;
   box-sizing: border-box;
-  max-width: 260px;
-  min-width: 260px;
+  width: 310px;
   height: 100vh;
   background-color: #171717;
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  transition: width .1s, padding .1s;
+  overflow: hidden;
 }
 
 .sidebar > div {
@@ -355,6 +377,8 @@ footer > p {
   display: flex;
   flex-direction: column;
   gap: 32px;
+  flex-grow: 1;
+  flex-shrink: 1;
 }
 
 .sidebar header {

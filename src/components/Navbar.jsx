@@ -1,18 +1,30 @@
 import profile from "../assets/profile.jpg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import SidebarOpenCloseBtn from "./sidebar/SidebarOpenCloseBtn";
 
 
 
-function Navbar () {
+function Navbar ({setIsSidebarOpened, isSidebarOpened, setIsModelsPopupOpened, toggleModelsPopup, toggleProfilePopup}) {
 
     return(
       <nav>
         <div className='model-bar'>
-          <span>ChatGPT 4o</span>
-          <span><FontAwesomeIcon icon={faChevronDown} /></span>
+          {
+            isSidebarOpened ? 
+            <>
+              <SidebarOpenCloseBtn setIsSidebarOpened={setIsSidebarOpened} /> 
+              <FontAwesomeIcon icon={faPenToSquare} />
+            </>  : ""
+          }
+          
+          <div onClick={() => toggleModelsPopup()}>
+            <span>ChatGPT 4o</span>
+            <span><FontAwesomeIcon icon={faChevronDown} /></span>
+          </div>
+
         </div>
-        <div>
+        <div onClick={() => toggleProfilePopup()}>
           <img src={profile} alt="logo" />
           <div className="img-overlay"></div>
         </div>

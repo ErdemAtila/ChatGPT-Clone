@@ -3,9 +3,37 @@ import AiModel from './AiModel';
 import TemporaryChat from './TemporaryChat';
 import AiModelsHeader from './AiModelsHeader';
 
-function AiModelsBar() {
+import React, { useRef, useEffect } from 'react';
+
+
+function AiModelsBar({ isOpen, onClose }) {
+    const popupRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (popupRef.current && !popupRef.current.contains(event.target)) {
+                onClose();
+            }
+        };
+
+        if (isOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+        }, [isOpen, onClose]);
+
+    if (!isOpen) {
+        return null;
+    }
+
+
     return(
-      <div className='models'>
+      <div ref={popupRef} className='models'>
         <AiModelsHeader icon={faCircleInfo} />
 
         <AiModel leftIcon={faStar} rightIcon={faCircleCheck} modelName="GPT-4o" modelDesc="Newest and most advanced model" />
