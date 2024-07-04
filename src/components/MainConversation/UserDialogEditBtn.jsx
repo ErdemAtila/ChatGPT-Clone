@@ -3,8 +3,10 @@ import { faPencil } from '@fortawesome/free-solid-svg-icons';
 
 function UserDialogEditBtn() {
     return (
-    <div className='edit-icon'>
+    <div className='edit-icon tooltip-container'>
         <FontAwesomeIcon icon={faPencil} />
+        <span class="tooltip-text">Read Aloud</span>
+
     </div>
     );
 }

@@ -12,10 +12,22 @@ function AssistantDialog({text}) {
         {text}
 
         <div className="actions">
-            <FontAwesomeIcon icon={faVolumeHigh} />
-            <FontAwesomeIcon icon={faClone} />
-            <FontAwesomeIcon icon={faThumbsDown} />
-            <FontAwesomeIcon icon={faStar} />
+            <div className="tooltip-container">
+                <FontAwesomeIcon icon={faVolumeHigh} />
+                <span class="tooltip-text">Read Aloud</span>
+            </div>
+            <div className="tooltip-container">
+                <FontAwesomeIcon icon={faClone} />
+                <span class="tooltip-text">Copy</span>
+            </div>
+            <div className="tooltip-container">
+                <FontAwesomeIcon icon={faThumbsDown} />
+                <span class="tooltip-text">Bad Response</span>
+            </div>
+            <div className="tooltip-container">
+                <FontAwesomeIcon icon={faStar} />
+                <span class="tooltip-text">Favourite</span>
+            </div>
         </div>
     </div>
     );

@@ -255,6 +255,7 @@ hr {
 .chat-bar .main-conversation .assistant-dialog .actions{
   display: flex;
   visibility: hidden;
+  align-items: center;
   opacity: 0;
   gap: 10px;
   padding: 10px;
@@ -264,15 +265,20 @@ hr {
   color: grey;
   transition: all .2s;
 }
+.chat-bar .main-conversation .assistant-dialog .actions svg:hover {
+  color: white;
+  cursor: pointer;
+}
 
 .chat-bar .main-conversation .assistant-dialog:hover .actions {
   visibility: visible;
   opacity: 1;
 }
 
-
-
-
+.chat-bar .main-conversation .assistant-dialog .actions .tooltip-text {
+  right: -60%;
+  top: 150%;
+}
 
 
 .checkboxes__item {
@@ -749,6 +755,5 @@ footer > p {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-  
 }
 
