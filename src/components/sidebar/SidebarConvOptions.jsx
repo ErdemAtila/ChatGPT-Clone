@@ -4,7 +4,7 @@ import { faArrowUpFromBracket, faPencil, faBoxArchive, faTrashCan } from '@forta
 
 function SidebarConvOptions({editId, id}) {
     return (
-        <div class={editId == id ? "edit-menu show" : "edit-menu"}>
+        <div class="edit-menu show">
             <div className='row'>
                 <FontAwesomeIcon icon={faArrowUpFromBracket} />
                 <span>Share</span>
