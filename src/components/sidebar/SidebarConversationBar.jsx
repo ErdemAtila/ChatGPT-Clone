@@ -1,13 +1,14 @@
 import SidebarConversation from "./SidebarConversation";
+import { getConversationList } from "../../commonFunctions";
 
-function SidebarConversationBar ({text}) {
+function SidebarConversationBar ({text, setCurrentConversation}) {
     return(
-        <div className='conversations'>
+      <div className='conversations'>
         <div className='header'>{text}</div>
 
-        <SidebarConversation text="Testimoniasl" id={1}/>
-        <SidebarConversation text="TestimoniaslTestimoniaslTestimoniaslTestimoniasl" id={2}/>
-        <SidebarConversation text="Testimoniasl" id={3}/>
+        {
+          getConversationList().map(conv => {return conv.category == text ? <SidebarConversation key={conv.id} text={conv.name} id={conv.id} setCurrentConversation={setCurrentConversation}/> : null})
+        }
 
       </div>
     );

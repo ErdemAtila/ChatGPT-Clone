@@ -5,7 +5,7 @@ import { AppContext } from '../../App';
 import { editHandler, blurHandler } from '../../commonFunctions';
 import SidebarConvOptions from './SidebarConvOptions';
 
-function SidebarConversation({ text, id }) {
+function SidebarConversation({ text, id, setCurrentConversation}) {
   const [editId, setEditId] = useContext(AppContext);
   const editInputRef = useRef(null);
   const popupRef = useRef(null);
@@ -39,12 +39,13 @@ function SidebarConversation({ text, id }) {
   }, [isEditPopupOpen]);
 
   return (
-    <div className="conversation">
+    <div className="conversation" onClick={() => setCurrentConversation(id)}>
       <p>{text}</p>
       <div
         className='options tooltip-container'
         ref={popupRef}
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();
           editHandler(id, setEditId, editInputRef);
           toggleEditPopup(id);
         }}

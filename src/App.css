@@ -87,6 +87,8 @@ nav > div:last-child:hover {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  overflow: hidden;
+
 }
 
 
@@ -101,6 +103,8 @@ nav > div:last-child:hover {
     display: flex;
   flex-direction: column;
   justify-content: space-between;
+  z-index: 12;
+
 }
 .chat-bar .profile {
   right: 0;
@@ -179,6 +183,94 @@ hr {
   color: rgb(177, 177, 177);
   letter-spacing: 0.6px;
 }
+
+.chat-bar .main-conversation {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-grow: 1;
+  flex-shrink: 1;
+  gap: 40px;
+  width: 75%; /* make responsive */
+  overflow-y: auto;
+  padding: 25px;
+}
+.chat-bar .main-conversation::-webkit-scrollbar {
+  display: none;
+}
+
+.chat-bar .main-conversation .user-dialog {
+  background-color: #2F2F2F;
+  text-align: left;
+  padding: 15px 25px; 
+  border-radius: 25px;
+  width: 75%; /*make it responsive and beatufilize*/
+  margin-left: auto;
+  max-width: 70%;
+  width: auto;
+  position: relative;
+}
+
+.chat-bar .main-conversation .user-dialog .edit-icon {
+  position: absolute;
+  left: -35px;
+  top: 0px;
+  font-size: 15px;
+  color: grey;
+  width: 50px;
+  padding-top: 15px;
+  height: 100%;
+  display: none;
+  box-sizing: border-box;
+  justify-content: flex-start;
+}
+.chat-bar .main-conversation .user-dialog .edit-icon svg:hover {
+  color: white;
+  cursor: pointer;
+}
+.chat-bar .main-conversation .user-dialog:hover .edit-icon {
+  display: flex;
+}
+
+.chat-bar .main-conversation .assistant-dialog {
+  text-align: left;
+  margin-left: auto;
+  position: relative;
+  padding-left: 50px;
+  margin-left: 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-bar .main-conversation .assistant-dialog .icon img{
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  padding: 2px;
+  border: 1px solid grey;
+  position: absolute;
+  left:-10px
+}
+
+.chat-bar .main-conversation .assistant-dialog .actions{
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid rgb(79, 79, 79);
+  align-self: flex-start;
+  border-radius: 10px;
+  color: grey;
+  transition: all .2s;
+}
+
+.chat-bar .main-conversation .assistant-dialog:hover .actions {
+  visibility: visible;
+  opacity: 1;
+}
+
+
 
 
 
@@ -391,6 +483,7 @@ footer > p {
   gap: 32px;
   flex-grow: 1;
   flex-shrink: 1;
+  padding-bottom: 60px; /* Glitch is fixed at the bottom of the element when hover*/
 }
 
 .sidebar header {

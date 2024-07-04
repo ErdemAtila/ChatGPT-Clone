@@ -7,13 +7,14 @@ import {PromptBar} from './PromptBar';
 import SidebarHeader from './components/sidebar/SidebarHeader';
 import SidebarGptsBar from './components/sidebar/SidebarGptsBar';
 import SidebarConversationBar from './components/sidebar/SidebarConversationBar';
+import Logo from './Logo';
+import MainConversation from './components/MainConversation/MainConversation';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRankingStar } from '@fortawesome/free-solid-svg-icons';
-import logo from "./assets/chatgpt_logo.png";
 
 import { useEffect, useRef, useState, createContext, useContext } from 'react';
-
+import { getConversationDateCategories } from './commonFunctions';
 export const AppContext = createContext();
 
 
@@ -48,20 +49,25 @@ function App() {
   //Editable Record
   const [editId, setEditId] = useState(0);
 
+  //currentConversation
+  const [currConversation, setCurrentConversation] = useState(0);
+
+
 
 
   return (
     <AppContext.Provider value={[editId, setEditId]}>
-
 
     <div className='page'>
       <div className='sidebar' style={isSidebarOpened ? {width: "0px", padding: "10px 0px"}  : null}>
         < SidebarHeader setIsSidebarOpened={setIsSidebarOpened}/>
         <div>
           < SidebarGptsBar />
-          < SidebarConversationBar text="Today"/>
-          {/* < SidebarConversationBar text="In Last 30 Days"/> */}
- 
+
+          {
+            // firslt, getting which category dates we got (pre, today, yester), then rendering ConversationBar. Inside Bar rendering items in "data" by looing at category that item has
+            getConversationDateCategories().map((category,index) => {return < SidebarConversationBar key={index} text={category} setCurrentConversation={setCurrentConversation}/>})
+          }
         </div>
 
         <footer>
@@ -85,12 +91,18 @@ function App() {
               toggleProfilePopup={toggleProfilePopup}
               />
           <div className='chat-bar'>
-              <AiModelsBar isOpen={isModelsPopupOpen} onClose={closeModelsPopup}  />
-              <ProfilePopup isOpen={isProfilePopupOpen} onClose={closeProfilePopup} />
-            <div className='middle-logo'>
-              <img src={logo} alt="logo" />
-            </div>
-            <RecommendationBar setPromptText={setPromptText} submitBtnRef={submitBtnRef}/>
+            <AiModelsBar isOpen={isModelsPopupOpen} onClose={closeModelsPopup}  />
+            <ProfilePopup isOpen={isProfilePopupOpen} onClose={closeProfilePopup} />
+
+            {
+              currConversation == 0 ? 
+              <>
+                <Logo />
+                <RecommendationBar setPromptText={setPromptText} submitBtnRef={submitBtnRef}/>
+              </> : 
+              <MainConversation currConversationId={currConversation} />
+            }
+
           </div>
 
 
