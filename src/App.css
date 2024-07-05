@@ -228,6 +228,12 @@ hr {
   color: white;
   cursor: pointer;
 }
+
+.chat-bar .main-conversation .user-dialog .edit-icon .tooltip-text {
+  right: 40%;
+  top: 90%;
+}
+
 .chat-bar .main-conversation .user-dialog:hover .edit-icon {
   display: flex;
 }

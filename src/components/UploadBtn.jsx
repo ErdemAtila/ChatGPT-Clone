@@ -6,7 +6,7 @@ function UploadBtn() {
     return (
     <div>
         <input type="file" id="upload" hidden/>
-        <label className='upload-label' for="upload"><FontAwesomeIcon icon={faPaperclip}/></label>
+        <label className='upload-label' htmlFor="upload"><FontAwesomeIcon icon={faPaperclip}/></label>
     </div>
     );
 }

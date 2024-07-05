@@ -5,7 +5,7 @@ function UserDialogEditBtn() {
     return (
     <div className='edit-icon tooltip-container'>
         <FontAwesomeIcon icon={faPencil} />
-        <span class="tooltip-text">Read Aloud</span>
+        <span className="tooltip-text">Read Aloud</span>
 
     </div>
     );

@@ -1,4 +1,14 @@
-import {data}  from "./assets/sampleData.js";
+import {sampleData}  from "./assets/sampleData.js";
+import { v4 as uuidv4 } from 'uuid';
+
+//localStorage.setItem("data", JSON.stringify(data));
+if(JSON.parse(localStorage.getItem("data")) == null) {
+  localStorage.setItem("data", JSON.stringify(sampleData));
+}
+let data = JSON.parse(localStorage.getItem("data"));
+
+
+
 import moment from 'moment';
 
 
@@ -15,13 +25,8 @@ export const blurHandler = (e, id, setEditId, editInputRef) => {
     console.log(`New value of (${id}) : ` + e.target.innerText);
 }
 
-export const getConversationList = () => {
-    return data.map(item => {return {"name" : item.name, id: item.id, date: item.date, category: determineDateCategory(item.date)}});
-}
 
-export const getConversationDateCategories = () => {
-    return [... new Set(data.map(item => determineDateCategory(item.date)))]
-  }  
+
 
 
 
@@ -74,7 +79,45 @@ export const determineDateCategory = (date) => {
   export const findConversationById = (id) => {
     return data.filter(item => id == item.id);
   }
-  
+
+
+export const createRecord = (text, setData, setCurrentConversation, setPromptText) => {
+  let abbr = text.split(" ")[0] + " " + text.split(" ")[1];
+  let id = uuidv4();
+
+  let newRecord = {
+    id: id,
+    date: moment().format("DD-MM-YYYY"),
+    name: abbr,
+    conversation: []
+  }
+
+  setCurrentConversation(id)
+
+  setData(curr => [...curr, newRecord]);
+  saveToDB([...getData(), newRecord]);
+  setPromptText("");
+}
+
+
+
+export const editNameBlurHandler = (e, id, setData) => {
+  let newConvName = e.target.innerText.trim();
+  let newData = getData().map(item => item.id == id ? {...item, name: newConvName} : item);
+  setData(newData);
+
+  saveToDB(newData);
+}
+
+
+export const saveToDB = (newData) => {
+  localStorage.setItem("data", JSON.stringify(newData));
+}
+export const getData = () => {
+  return JSON.parse(localStorage.getItem("data"));
+}
+
+
   
   
   

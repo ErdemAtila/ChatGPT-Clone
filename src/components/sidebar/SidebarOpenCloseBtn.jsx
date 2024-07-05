@@ -8,8 +8,8 @@ function SidebarOpenCloseBtn ({setIsSidebarOpened, isSidebarOpened}) {
             <FontAwesomeIcon onClick={() => sidebarBtnHandler(setIsSidebarOpened)} icon={faTableCellsLarge} />
             {
             isSidebarOpened ? 
-            <span class="tooltip-text left">Open Slidebar</span> : 
-            <span class="tooltip-text left">Close Slidebar</span>}
+            <span className="tooltip-text left">Open Slidebar</span> : 
+            <span className="tooltip-text left">Close Slidebar</span>}
         </div>
     );
 }

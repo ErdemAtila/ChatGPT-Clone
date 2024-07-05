@@ -9,13 +9,15 @@ import SidebarGptsBar from './components/sidebar/SidebarGptsBar';
 import SidebarConversationBar from './components/sidebar/SidebarConversationBar';
 import Logo from './Logo';
 import MainConversation from './components/MainConversation/MainConversation';
+import { determineDateCategory } from './commonFunctions';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRankingStar } from '@fortawesome/free-solid-svg-icons';
 
 import { useEffect, useRef, useState, createContext, useContext } from 'react';
-import { getConversationDateCategories } from './commonFunctions';
 export const AppContext = createContext();
+
+let data = JSON.parse(localStorage.getItem("data"));
 
 
 function App() {
@@ -41,6 +43,8 @@ function App() {
   };
 
 
+
+
   //Prompt Bar
   const [promptText, setPromptText] = useState("");
   const submitBtnRef = useRef();
@@ -52,21 +56,40 @@ function App() {
   //currentConversation
   const [currConversation, setCurrentConversation] = useState(0);
 
+  const [sampleData, setData] = useState(data);
 
+  useEffect(()=> console.log(sampleData), [sampleData]);
 
+  //conversation categories
+  const getConversationDateCategories = () => {
+    const priority = {
+      'today': 0,
+      'yesterday': 1,
+      'Previous 7 Days': 2,
+      'Previous 30 Days': 3
+    };
 
+    let unsortedCategories = [... new Set(sampleData.map(item => !item.isArchieved ? determineDateCategory(item.date) : null).filter(item => item != null))]
+
+  
+    const sortedList = unsortedCategories.sort((a, b) => priority[a] - priority[b]);
+  
+    return sortedList;
+  }  
+
+  console.log();
+  console.log(getConversationDateCategories());
   return (
     <AppContext.Provider value={[editId, setEditId]}>
-
     <div className='page'>
       <div className='sidebar' style={isSidebarOpened ? {width: "0px", padding: "10px 0px"}  : null}>
-        < SidebarHeader setIsSidebarOpened={setIsSidebarOpened}/>
+        < SidebarHeader setIsSidebarOpened={setIsSidebarOpened} setCurrentConversation={setCurrentConversation}/>
         <div>
           < SidebarGptsBar />
 
           {
             // firslt, getting which category dates we got (pre, today, yester), then rendering ConversationBar. Inside Bar rendering items in "data" by looing at category that item has
-            getConversationDateCategories().map((category,index) => {return < SidebarConversationBar key={index} text={category} setCurrentConversation={setCurrentConversation}/>})
+            getConversationDateCategories().map((category,index) => {return < SidebarConversationBar key={index} text={category} currConversation={currConversation} setCurrentConversation={setCurrentConversation} setData={setData} data={sampleData}/>})
           }
         </div>
 
@@ -98,7 +121,7 @@ function App() {
               currConversation == 0 ? 
               <>
                 <Logo />
-                <RecommendationBar setPromptText={setPromptText} submitBtnRef={submitBtnRef}/>
+                <RecommendationBar setCurrentConversation={setCurrentConversation} setPromptText={setPromptText} submitBtnRef={submitBtnRef} setData={setData}/>
               </> : 
               <MainConversation currConversationId={currConversation} />
             }

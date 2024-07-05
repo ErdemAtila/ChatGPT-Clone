@@ -6,9 +6,9 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 function MainConversation({currConversationId}) {
-    let dialogs = findConversationById(currConversationId)[0].conversation;
+    let results = findConversationById(currConversationId);
+    let dialogs = results.length != 0 ? results[0].conversation : results;
 
-    console.log(dialogs);
     return(
         <div className="main-conversation">
             {

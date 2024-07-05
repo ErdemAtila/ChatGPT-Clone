@@ -1,8 +1,9 @@
-export const data = [
+export const sampleData = [
     {   
         id: 1003,
         name: "Greetings",
         date: "04-07-2024",
+        isArchieved: false,
         conversation: [
             {
                 "role": "user",
@@ -18,6 +19,7 @@ export const data = [
         id: 1002,
         name: "Gaakpo",
         date: "01-07-2024",
+        isArchieved: false,
         conversation: [
             {
                 "role": "user",
@@ -33,6 +35,7 @@ export const data = [
         id:1001,
         name: "About Ankara",
         date: "06-06-2024",
+        isArchieved: false,
         conversation: [
             {
                 "role": "user",
