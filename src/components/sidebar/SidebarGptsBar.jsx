@@ -1,15 +1,14 @@
-import { faCube } from '@fortawesome/free-solid-svg-icons';
+import { faCube, faBoxesStacked } from '@fortawesome/free-solid-svg-icons';
 
 import SidebarGpt from './SidebarGpt';
 
 
-function SidebarGptsBar () {
+function SidebarGptsBar ({setCurrentConversation}) {
     return (
     <div className='gpts'>
-        <SidebarGpt icon={faCube} text="ChatGPT" id={34} />
-        <SidebarGpt icon={faCube} text="Image Generator" id={35}/>
-        <SidebarGpt icon={faCube} text="ChatGPT" id={36}/>
-        <SidebarGpt icon={faCube} text="ChatGPT" id={37}/>
+        <SidebarGpt icon={faCube} text="ChatGPT" setCurrentConversation={setCurrentConversation}/>
+        <SidebarGpt icon={faCube} text="Image Generator" setCurrentConversation={setCurrentConversation}/>
+        <SidebarGpt icon={faBoxesStacked} text="Explore GPTs" setCurrentConversation={setCurrentConversation}/>
     </div>
     );
 }

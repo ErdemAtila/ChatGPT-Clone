@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
-function AiModel ({leftIcon, rightIcon, modelName, modelDesc}) {
+function AiModel ({leftIcon, rightIcon, modelName, modelDesc, setAIModel}) {
     return(
-    <div className='model'>
+    <div className='model' onClick={() => setAIModel(modelName)} >
         <div>
           <FontAwesomeIcon icon={leftIcon} />
           <div className='information'>

@@ -5,7 +5,7 @@ import { AppContext } from '../../App';
 import { editHandler, editNameBlurHandler } from '../../commonFunctions';
 import SidebarConvOptions from './SidebarConvOptions';
 
-function SidebarConversation({ text, id, setCurrentConversation, setData, currConversation}) {
+function SidebarConversation({setIsTemporary, text, id, setCurrentConversation, setData, currConversation, setLastResponse}) {
   // popup visibility handler
   const popupRef = useRef(null);
   const [isEditPopupOpen, setIsEditPopupOpen] = useState(false);
@@ -37,6 +37,9 @@ function SidebarConversation({ text, id, setCurrentConversation, setData, currCo
   }, [isEditPopupOpen]);
 
 
+
+
+
   // options popup actions
   const [editId, setEditId] = useContext(AppContext);
   const [isRenamed, setIsRenamed] = useState(false);
@@ -46,7 +49,7 @@ function SidebarConversation({ text, id, setCurrentConversation, setData, currCo
 
 
   return (
-    <div className="conversation" style={id == currConversation ? {background: "#212121"}: null} onClick={() => setCurrentConversation(id)}>
+    <div className="conversation" style={id == currConversation ? {background: "#212121"}: null} onClick={() => {setCurrentConversation(id); setLastResponse(""); setIsTemporary(false)}}>
       <p contentEditable={isRenamed} ref={editInputRef}  onBlur={(e) => editNameBlurHandler(e, id, setData)}>{text}</p>
       <div
         className='options tooltip-container'
@@ -62,7 +65,7 @@ function SidebarConversation({ text, id, setCurrentConversation, setData, currCo
       </div>
 
       {editId === id && isEditPopupOpen && (
-        <SidebarConvOptions editId={editId} id={id} closeEditPopup={closeEditPopup} setIsRenamed={setIsRenamed} setData={setData} editInputRef={editInputRef}/>
+        <SidebarConvOptions editId={editId} id={id} setCurrentConversation={setCurrentConversation} closeEditPopup={closeEditPopup} setIsRenamed={setIsRenamed} setData={setData} editInputRef={editInputRef}/>
       )}
     </div>
   );

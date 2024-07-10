@@ -6,7 +6,7 @@ import AiModelsHeader from './AiModelsHeader';
 import React, { useRef, useEffect } from 'react';
 
 
-function AiModelsBar({ isOpen, onClose }) {
+function AiModelsBar({ isOpen, onClose, setAIModel, AIModel, setIsTemporary, isTemporary, setCurrentConversation}) {
     const popupRef = useRef(null);
 
     useEffect(() => {
@@ -15,7 +15,6 @@ function AiModelsBar({ isOpen, onClose }) {
                 onClose();
             }
         };
-
         if (isOpen) {
             document.addEventListener('mousedown', handleClickOutside);
         } else {
@@ -36,11 +35,11 @@ function AiModelsBar({ isOpen, onClose }) {
       <div ref={popupRef} className='models'>
         <AiModelsHeader icon={faCircleInfo} />
 
-        <AiModel leftIcon={faStar} rightIcon={faCircleCheck} modelName="GPT-4o" modelDesc="Newest and most advanced model" />
-        <AiModel leftIcon={faStar} modelName="GPT-4" modelDesc="Advanced model for complex tasks" />
-        <AiModel leftIcon={faStar} modelName="GPT-3.5" modelDesc="Great for everday tasks" />
+        <AiModel setAIModel={setAIModel} leftIcon={faStar} rightIcon={AIModel == "gpt-4o" ? faCircleCheck : null} modelName="gpt-4o" modelDesc="Newest and most advanced model" />
+        <AiModel setAIModel={setAIModel} leftIcon={faStar} rightIcon={AIModel == "gpt-4" ? faCircleCheck : null} modelName="gpt-4" modelDesc="Advanced model for complex tasks" />
+        <AiModel setAIModel={setAIModel} leftIcon={faStar} rightIcon={AIModel == "gpt-3.5-turbo" ? faCircleCheck : null} modelName="gpt-3.5-turbo" modelDesc="Great for everday tasks" />
         <hr />
-        <TemporaryChat />
+        <TemporaryChat isTemporary={isTemporary} setIsTemporary={setIsTemporary} setCurrentConversation={setCurrentConversation} />
       </div>
     );
 }

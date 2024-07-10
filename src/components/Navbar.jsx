@@ -5,7 +5,7 @@ import SidebarOpenCloseBtn from "./sidebar/SidebarOpenCloseBtn";
 
 
 
-function Navbar ({setIsSidebarOpened, isSidebarOpened, setIsModelsPopupOpened, toggleModelsPopup, toggleProfilePopup}) {
+function Navbar ({setIsTemporary ,setIsSidebarOpened, AIModel, isSidebarOpened, setIsModelsPopupOpened, setCurrentConversation, toggleModelsPopup, toggleProfilePopup}) {
 
     return(
       <nav>
@@ -15,14 +15,14 @@ function Navbar ({setIsSidebarOpened, isSidebarOpened, setIsModelsPopupOpened, t
             <>
               <SidebarOpenCloseBtn setIsSidebarOpened={setIsSidebarOpened} /> 
               <div className="tooltip-container">
-                <FontAwesomeIcon icon={faPenToSquare} />
-                <span class="tooltip-text left">New Chat</span>
+                <FontAwesomeIcon icon={faPenToSquare}  onClick={() => {setCurrentConversation(0); setIsTemporary(false)}}/>
+                <span className="tooltip-text left">New Chat</span>
               </div>
             </>  : ""
           }
           
           <div onClick={() => toggleModelsPopup()}>
-            <span>ChatGPT 4o</span>
+            <span>Chat{AIModel}</span>
             <span><FontAwesomeIcon icon={faChevronDown} /></span>
           </div>
 

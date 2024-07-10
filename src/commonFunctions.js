@@ -77,20 +77,36 @@ export const determineDateCategory = (date) => {
 
 
   export const findConversationById = (id) => {
-    return data.filter(item => id == item.id);
+    return getData().filter(item => id == item.id);
   }
 
 
-export const createRecord = (text, setData, setCurrentConversation, setPromptText) => {
-  let abbr = text.split(" ")[0] + " " + text.split(" ")[1];
-  let id = uuidv4();
-
-  let newRecord = {
-    id: id,
-    date: moment().format("DD-MM-YYYY"),
-    name: abbr,
-    conversation: []
+export const createRecord = (text, setData, setCurrentConversation, setPromptText, isTemporary) => {
+  let newRecord = {};
+  let id = 0;
+  if(typeof text == "object") {
+    let abbr =  "New Chat";
+    id = uuidv4();
+  
+     newRecord = {
+      id: id,
+      date: moment().format("DD-MM-YYYY"),
+      name: abbr,
+      conversation: text,
+      isArchieved: isTemporary
+    }
+  } else {
+    let abbr = text.split(" ")[0] + " " + text.split(" ")[1];
+    id = uuidv4();
+  
+     newRecord = {
+      id: id,
+      date: moment().format("DD-MM-YYYY"),
+      name: abbr,
+      conversation: []
+    }
   }
+
 
   setCurrentConversation(id)
 

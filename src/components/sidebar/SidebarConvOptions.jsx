@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpFromBracket, faPencil, faBoxArchive, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { getData, saveToDB } from '../../commonFunctions';
 
-function SidebarConvOptions({editId, id, closeEditPopup, setIsRenamed, editInputRef, setData}) {
+function SidebarConvOptions({editId, setCurrentConversation, id, closeEditPopup, setIsRenamed, editInputRef, setData}) {
     const focusAndMoveCursorToEnd = (element) => {
         const range = document.createRange();
         const sel = window.getSelection();
@@ -18,6 +18,8 @@ function SidebarConvOptions({editId, id, closeEditPopup, setIsRenamed, editInput
 
         setData(newData);
         saveToDB(newData);
+
+        setCurrentConversation(currId => currId == id ? 0 : currId);
       }
 
     const archieveHandler = (e, id) => {

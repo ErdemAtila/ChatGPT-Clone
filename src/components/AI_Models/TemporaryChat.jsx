@@ -1,7 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
 
-function TemporaryChat () {
+function TemporaryChat ({setIsTemporary, isTemporary, setCurrentConversation}) {
+
     return (
     <div className='model'>
         <div>
@@ -13,7 +14,7 @@ function TemporaryChat () {
         </div>
         <div className="checkboxes__item">
           <label className="checkbox style-e">
-            <input type="checkbox"/>
+            <input type="checkbox" checked={isTemporary} onChange={(e) => {setIsTemporary(e.target.checked); setCurrentConversation(0)}}/>
             <div className="checkbox__checkmark"></div>
           </label>
         </div>

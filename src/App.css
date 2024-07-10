@@ -204,12 +204,16 @@ hr {
   text-align: left;
   padding: 15px 25px; 
   border-radius: 25px;
-  width: 75%; /*make it responsive and beatufilize*/
   margin-left: auto;
   max-width: 70%;
   width: auto;
   position: relative;
+  align-items: center;
+  word-wrap: break-word; /* Uzun kelimeleri böler */
+  overflow-wrap: break-word; /* Uzun kelimeleri böler */
+  white-space: normal; /* Metnin satır sonlarında kırılmasına izin verir */
 }
+
 
 .chat-bar .main-conversation .user-dialog .edit-icon {
   position: absolute;
@@ -232,6 +236,40 @@ hr {
 .chat-bar .main-conversation .user-dialog .edit-icon .tooltip-text {
   right: 40%;
   top: 90%;
+}
+
+.chat-bar .main-conversation .user-dialog textarea {
+  width: 100%;
+  outline: none;
+  border: none;
+  background-color: #424242;
+  font-size: 16px;
+  resize: none;
+  
+}
+
+.chat-bar .main-conversation .user-dialog .edit-buttons{
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+  font-size: 14px;
+}
+.chat-bar .main-conversation .user-dialog .edit-buttons .cancel {
+  padding: 5px 10px;
+  background-color:black;
+  border-radius: 10px;
+  font-weight: bold;
+}
+.chat-bar .main-conversation .user-dialog .edit-buttons .send {
+  padding: 5px 10px;
+  background-color:white;
+  border-radius: 10px;
+  color: black;
+  font-weight: bold;
+}
+.user-dialog .edit-buttons div:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 .chat-bar .main-conversation .user-dialog:hover .edit-icon {
@@ -258,6 +296,14 @@ hr {
   left:-10px
 }
 
+
+
+.chat-bar .main-conversation .assistant-dialog .loading-icon {
+  color: white;
+  position: absolute;
+  left: 50px
+}
+
 .chat-bar .main-conversation .assistant-dialog .actions{
   display: flex;
   visibility: hidden;
@@ -282,7 +328,7 @@ hr {
 }
 
 .chat-bar .main-conversation .assistant-dialog .actions .tooltip-text {
-  right: -60%;
+  right: -70%;
   top: 150%;
 }
 
@@ -402,11 +448,21 @@ footer {
   align-items: center;
 }
 
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: black; }
+}
+.animated-text {
+  animation: blink-caret .75s step-end infinite;
+
+}
+
 footer > p {
   font-size: 12px;
   padding-bottom: 5px;
   padding-top: 5px;
   color: rgb(201, 201, 201);
+
 }
 
 .prompt-bar {
@@ -509,6 +565,7 @@ footer > p {
 .tooltip-container {
   position: relative;
   display: inline-block;
+  z-index: 25;
 }
 
 /* Tooltip text */
@@ -653,6 +710,11 @@ footer > p {
   font-size: 13px;
   color: #B4B4B4;
   padding-left: 6px;
+  position: sticky;
+  top: 0px;
+  background-color: #171717;
+  z-index: 12;
+  
 }
 
 .conversation {
@@ -686,6 +748,7 @@ footer > p {
   display: none;
   z-index: 2;
   display: inline-block;
+  z-index: 35;
 }
 
 .conversation .edit-menu .row {

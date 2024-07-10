@@ -26,6 +26,7 @@ function App() {
   const [isModelsPopupOpened, setIsModelsPopupOpened] = useState(false);
 
   //Popups
+  const [AIModel, setAIModel] = useState("gpt-3.5-turbo");
   const [isModelsPopupOpen, setIsModelsPopupOpen] = useState(false);
   const [isProfilePopupOpen, setIsProfilePopupOpen] = useState(false);
 
@@ -46,8 +47,11 @@ function App() {
 
 
   //Prompt Bar
-  const [promptText, setPromptText] = useState("");
   const submitBtnRef = useRef();
+  const inputRef = useRef();
+
+  const [loading, setLoading] = useState(false);
+  const [lastResponse, setLastResponse] = useState("");
 
 
   //Editable Record
@@ -55,10 +59,11 @@ function App() {
 
   //currentConversation
   const [currConversation, setCurrentConversation] = useState(0);
+  const conversationBarRef = useRef(null);
 
   const [sampleData, setData] = useState(data);
 
-  useEffect(()=> console.log(sampleData), [sampleData]);
+  //useEffect(()=> console.log(sampleData), [sampleData]);
 
   //conversation categories
   const getConversationDateCategories = () => {
@@ -66,30 +71,31 @@ function App() {
       'today': 0,
       'yesterday': 1,
       'Previous 7 Days': 2,
-      'Previous 30 Days': 3
+      'Previous 30 Days': 3,
+      'Older': 4
     };
-
     let unsortedCategories = [... new Set(sampleData.map(item => !item.isArchieved ? determineDateCategory(item.date) : null).filter(item => item != null))]
-
-  
     const sortedList = unsortedCategories.sort((a, b) => priority[a] - priority[b]);
-  
     return sortedList;
   }  
 
-  console.log();
-  console.log(getConversationDateCategories());
+  // temporary chat
+  const [isTemporary, setIsTemporary] = useState(false);
+
+
+
+
   return (
     <AppContext.Provider value={[editId, setEditId]}>
     <div className='page'>
       <div className='sidebar' style={isSidebarOpened ? {width: "0px", padding: "10px 0px"}  : null}>
-        < SidebarHeader setIsSidebarOpened={setIsSidebarOpened} setCurrentConversation={setCurrentConversation}/>
+        < SidebarHeader setIsTemporary={setIsTemporary} setIsSidebarOpened={setIsSidebarOpened} setCurrentConversation={setCurrentConversation}/>
         <div>
-          < SidebarGptsBar />
+          < SidebarGptsBar setCurrentConversation={setCurrentConversation} />
 
           {
             // firslt, getting which category dates we got (pre, today, yester), then rendering ConversationBar. Inside Bar rendering items in "data" by looing at category that item has
-            getConversationDateCategories().map((category,index) => {return < SidebarConversationBar key={index} text={category} currConversation={currConversation} setCurrentConversation={setCurrentConversation} setData={setData} data={sampleData}/>})
+            getConversationDateCategories().map((category,index) => {return < SidebarConversationBar setIsTemporary={setIsTemporary} key={index} setLastResponse={setLastResponse} text={category} currConversation={currConversation} setCurrentConversation={setCurrentConversation} setData={setData} data={sampleData}/>})
           }
         </div>
 
@@ -112,25 +118,28 @@ function App() {
               setIsModelsPopupOpened={setIsModelsPopupOpened}
               toggleModelsPopup={toggleModelsPopup}
               toggleProfilePopup={toggleProfilePopup}
+              setCurrentConversation={setCurrentConversation}
+              AIModel={AIModel.toUpperCase()}
+              setIsTemporary={setIsTemporary}
               />
           <div className='chat-bar'>
-            <AiModelsBar isOpen={isModelsPopupOpen} onClose={closeModelsPopup}  />
+            <AiModelsBar isTemporary={isTemporary} setIsTemporary={setIsTemporary} setCurrentConversation={setCurrentConversation} AIModel={AIModel} setAIModel={setAIModel} isOpen={isModelsPopupOpen} onClose={closeModelsPopup}  />
             <ProfilePopup isOpen={isProfilePopupOpen} onClose={closeProfilePopup} />
 
             {
               currConversation == 0 ? 
               <>
                 <Logo />
-                <RecommendationBar setCurrentConversation={setCurrentConversation} setPromptText={setPromptText} submitBtnRef={submitBtnRef} setData={setData}/>
+                <RecommendationBar inputRef={inputRef} setCurrentConversation={setCurrentConversation} submitBtnRef={submitBtnRef} setData={setData}/>
               </> : 
-              <MainConversation currConversationId={currConversation} />
+              <MainConversation inputRef={inputRef} lastResponse={lastResponse} setLastResponse={setLastResponse} loading={loading} currConversationId={currConversation} conversationBarRef={conversationBarRef}  submitBtnRef={submitBtnRef} />
             }
 
           </div>
 
 
           <footer>
-            <PromptBar setPromptText={setPromptText} promptText={promptText} submitBtnRef={submitBtnRef}/>
+            <PromptBar isTemporary={isTemporary} inputRef={inputRef} AIModel={AIModel} lastResponse={lastResponse} setLastResponse={setLastResponse} setLoading={setLoading} currConversation={currConversation} setCurrentConversation={setCurrentConversation} setData={setData} data={sampleData} submitBtnRef={submitBtnRef}/>
             <p>ChatGPT can make mistakes. Check important info.</p>
           </footer>
       </main>
